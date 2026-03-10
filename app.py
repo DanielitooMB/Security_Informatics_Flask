@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask,render_template
 
-app = Flask(__name__)
+
+app= Flask(__name__)
 
 @app.route('/')
 def index():
@@ -9,6 +10,12 @@ def index():
 @app.route('/welcome')
 def welcome():
     return render_template('welcome.html')
-#underscore methods and properties
-if __name__ == '__main__':
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+#underscore 
+if __name__== '__main__':
     app.run()
+

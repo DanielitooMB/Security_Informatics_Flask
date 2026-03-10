@@ -5,10 +5,16 @@ function register(){
     repeatpassword = document.getElementById("user-repeat-password").value;
 
     if(password != repeatpassword) {
-        alert("Las contraseñas no coinciden")
+        Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+        });
         return;
 
-        // sweetalert
+        // sweetalert        
+
     }
 
     const data = {

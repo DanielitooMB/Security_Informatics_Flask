@@ -1,8 +1,8 @@
 document.getElementById("btn-register").addEventListener("click", register);
 
 function register(){
-    password = document.getElementById("user-password").value;
-    repeatpassword = document.getElementById("user-repeat-password").value;
+    const password = document.getElementById("user-password").value;
+    const repeatpassword = document.getElementById("user-repeat-password").value;
 
     if(password != repeatpassword) {
         Swal.fire({
@@ -23,4 +23,19 @@ function register(){
         password: document.getElementById("user-password").value
     }
 
+    fetch('api/users', {
+        method:"POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    }).then(response => response.json())
+    .then(result => {
+        if(result.success){
+            alert("Usuario se guardó correctamente")
+        }else {
+            alert(result.message)
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    })
 }

@@ -1,21 +1,22 @@
-from flask import Flask,render_template, request, jsonify
+
+from flask import Flask, render_template, request, jsonify
 from entities.user import User
 
-app= Flask(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
 @app.route('/welcome')
 def welcome():
     return render_template('welcome.html')
 
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
-
-@app.route('/api/users', methods = ["POST"])
+@app.route('/api/users', methods=["POST"])
 def create_user():
     data = request.get_json()
 
@@ -23,11 +24,13 @@ def create_user():
     email = data.get("email")
     password = data.get("password")
 
-    User.save(name, email, password)
+    if User.check_email_exists(email):
+        return jsonify({"success": False, "message": "El correo electrónico ingresado ya se encuentra registrado."}), 409
 
-    return jsonify({"success":True})
+    if User.save(name, email, password):
+        return jsonify({"success": True, "message": "Su cuenta fue creada correctamente."}), 201
+    else:
+        return jsonify({"success": False, "message": "Ocurrió un error al crear su cuenta. Intente de nuevo"}), 500
 
-#underscore 
-if __name__== '__main__':
+if __name__ == '__main__':
     app.run()
-

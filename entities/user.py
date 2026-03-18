@@ -1,5 +1,5 @@
 from persistence.db import get_connection
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 import pymysql
 
 class User:
@@ -45,7 +45,7 @@ class User:
         """
         try:
             connection = get_connection()
-            cursor = connection.cursor()
+            cursor = connection.cursor(pymysql.cursors.DictCursor)
             hash_password = generate_password_hash(password)
 
             sql = "INSERT INTO user (name, email, password) VALUES (%s, %s, %s)"
@@ -57,4 +57,30 @@ class User:
             return True
         except Exception as ex:
             print(f"Error saving user:{ex}")
+            return False
+        
+    def check_login(email, password):
+        try:
+            connection = get_connection()
+            cursor = connection.cursor(pymysql.cursors.DictCursor)
+
+            sql = "SELECT id, name, email, password FROM user WHERE email = %s"
+            cursor.execute(sql, (email,))
+
+            user = cursor.fetchone()
+
+            cursor.close()
+            connection.close()
+
+            if user and check_password_hash(user["password"], password):
+                return User(
+                    user["id"],
+                    user["name"],
+                    user["email"],
+                    ""
+                )
+
+            return None
+        except Exception as ex:
+            print(f"Error  user:{ex}")
             return False

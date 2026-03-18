@@ -32,5 +32,26 @@ def create_user():
     else:
         return jsonify({"success": False, "message": "Ocurrió un error al crear su cuenta. Intente de nuevo"}), 500
 
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.get_json()
+
+    email = data.get("email")
+    password = data.get("password")
+
+    user = User.check_login(email, password)
+    if user:
+
+        return jsonify({
+            "success": True,
+            "message": "Sesión iniciada correctamente"
+        }), 200
+    else:
+        return jsonify({
+            "success": False,
+            "message": "Los datos de acceso ingresados no son correctos."
+        }), 401
+
+
 if __name__ == '__main__':
     app.run()

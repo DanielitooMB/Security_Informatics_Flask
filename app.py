@@ -14,6 +14,9 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "index"
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get_by_id(user_id)
 
 @app.route('/')
 def index():
@@ -65,15 +68,11 @@ def login():
             "message": "Los datos de acceso ingresados no son correctos."
         }), 401
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.get_by_id(user_id)
-
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("index"))    
+    return redirect(url_for("index"))
 
 if __name__ == '__main__':
     app.run()

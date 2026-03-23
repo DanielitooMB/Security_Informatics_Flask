@@ -93,9 +93,8 @@ class User (UserMixin):
                 connection = get_connection()
                 cursor = connection.cursor(pymysql.cursors.DictCursor)
                 
-
                 sql = "SELECT id, name, email, password FROM user WHERE id = %s"
-                cursor.execute(sql, (id))
+                cursor.execute(sql, (id,))
 
                 user = cursor.fetchone()
                 
@@ -109,3 +108,8 @@ class User (UserMixin):
                         user["email"],
                         user["password"]
                     )
+
+                return None
+            except Exception as ex:
+                print(f"Error login user:{ex}")
+                return False

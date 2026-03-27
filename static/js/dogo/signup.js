@@ -1,3 +1,4 @@
+
 document.getElementById("btn-register").addEventListener("click", register);
 
 function register(){

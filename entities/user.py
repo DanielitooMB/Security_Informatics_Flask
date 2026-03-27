@@ -11,6 +11,7 @@ class User (UserMixin):
         self.email = email
         self.password = password
     
+    @staticmethod
     def check_email_exists(email) -> bool:
         """
             Verifica si la cuenta de correo electrónico ya se encuentra registrada.
@@ -32,7 +33,7 @@ class User (UserMixin):
         connection.close()
         return row is not None
     
-        
+    @staticmethod
     def save(name: str, email:str, password:str) -> bool:
         """
             Guarda un registro de usuario en la base de datos
@@ -60,7 +61,8 @@ class User (UserMixin):
         except Exception as ex:
             print(f"Error saving user:{ex}")
             return False
-        
+
+    @staticmethod    
     def check_login(email, password):
         try:
             connection = get_connection()
@@ -87,7 +89,8 @@ class User (UserMixin):
         except Exception as ex:
             print(f"Error login user:{ex}")
             return False
-        
+
+    @staticmethod    
     def get_by_id(id):
             try:
                 connection = get_connection()

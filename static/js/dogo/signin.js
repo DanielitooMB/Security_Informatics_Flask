@@ -1,4 +1,3 @@
-
 document.getElementById("btn-signin").addEventListener("click", login);
 
 function login(){

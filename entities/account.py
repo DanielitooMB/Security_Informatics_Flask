@@ -34,3 +34,8 @@ class Account():
                 user,
                 transactions
             )
+
+            return account
+        except Exception as ex:
+            print(f"Error login user:{ex}")
+            return False

@@ -1,0 +1,140 @@
+.mov-layout {
+    display: flex;
+    gap: 20px;
+    min-height: 70vh;
+}
+
+.card-usuario {
+    width: 260px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.card-usuario img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.card-usuario .nombre {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.card-usuario .cuenta-num {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.card-usuario hr {
+    width: 100%;
+    margin: 16px 0;
+    border-color: #eee;
+}
+
+.card-usuario .balance-label {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.card-usuario .balance-monto {
+    font-size: 22px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.balance-currency {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.balance-currency.positivo {
+    color: #27ae60;
+}
+
+.balance-currency.negativo {
+    color: #e74c3c;
+}
+
+.card-movimientos {
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.card-movimientos h5 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 18px;
+}
+
+.card-movimientos table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.card-movimientos thead th {
+    font-size: 13px;
+    color: #999;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: left;
+}
+
+.card-movimientos tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.card-movimientos tbody td {
+    padding: 12px;
+    font-size: 14px;
+    color: #555;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.badge-ingreso {
+    background-color: #e6faf1;
+    color: #27ae60;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-egreso {
+    background-color: #fdecea;
+    color: #e74c3c;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.monto-ingreso {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.monto-egreso {
+    color: #e74c3c;
+    font-weight: 600;
+}

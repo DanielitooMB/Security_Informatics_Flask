@@ -69,8 +69,7 @@ class User (UserMixin):
             connection = get_connection()
             cursor = connection.cursor(pymysql.cursors.DictCursor)
             
-
-            sql = "SELECT id, name, email, password FROM user WHERE email = %s"
+            sql = "SELECT user.id, user.name, user, user.email, user.profile, permission.value, permission.is_active FROM user JOIN permission ON user.id = user.id"
             cursor.execute(sql, (email,))
 
             user = cursor.fetchone()
@@ -83,7 +82,8 @@ class User (UserMixin):
                     user["id"],
                     user["name"],
                     user["email"],
-                    ""
+                    "",
+                    user["profile"]
                 )
 
             return None
@@ -95,7 +95,7 @@ class User (UserMixin):
             try:
                 connection = get_connection()
                 cursor = connection.cursor(pymysql.cursors.DictCursor)
-                
+
                 sql = "SELECT id, name, email, password FROM user WHERE id = %s"
                 cursor.execute(sql, (id,))
 
@@ -109,7 +109,9 @@ class User (UserMixin):
                         user["id"],
                         user["name"],
                         user["email"],
-                        user["password"]
+                        user["password"],
+                        user["profile"],
+                        user["is_active"]
                     )
 
                 return None

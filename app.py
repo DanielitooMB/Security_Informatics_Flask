@@ -82,6 +82,7 @@ def login():
 
     user = User.check_login(email, password)
     if user:
+        #login is_active
         login_user(user)
         #Invocar el método
         Log.save_log(user, "TODO BIEN", LogType.LOGIN)

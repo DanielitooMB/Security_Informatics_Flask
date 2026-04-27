@@ -69,6 +69,7 @@ class User (UserMixin):
             connection = get_connection()
             cursor = connection.cursor(pymysql.cursors.DictCursor)
             #Verificar el JOIN
+            #Cambiar SQL da error
             sql = "SELECT user.id, user.name, user.email, permission.value FROM user LEFT JOIN permission ON user.id = permission.id WHERE user.id = 2"
             cursor.execute(sql, (email,))
 
@@ -83,7 +84,8 @@ class User (UserMixin):
                     user["name"],
                     user["email"],
                     "",
-                    user["profile"]
+                    user["profile"],
+                    user["is_active"]
                 )
 
             return None

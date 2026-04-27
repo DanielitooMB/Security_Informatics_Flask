@@ -68,8 +68,8 @@ class User (UserMixin):
         try:
             connection = get_connection()
             cursor = connection.cursor(pymysql.cursors.DictCursor)
-            
-            sql = "SELECT user.id, user.name, user, user.email, user.profile, permission.value, permission.is_active FROM user JOIN permission ON user.id = user.id"
+            #Verificar el JOIN
+            sql = "SELECT user.id, user.name, user.email, permission.value FROM user LEFT JOIN permission ON user.id = permission.id WHERE user.id = 2"
             cursor.execute(sql, (email,))
 
             user = cursor.fetchone()
